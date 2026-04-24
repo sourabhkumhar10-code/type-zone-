@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Type Zone - Learn Touch Typing</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Top Navigation Bar -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <div class="nav-left">
+          <h1 class="logo">Type Zone</h1>
+          <div class="nav-links">
+            <a href="#lessons" class="nav-link active" id="navLessons">Lessons</a>
+            <a href="#practice" class="nav-link" id="navPractice">Practice</a>
+            <a href="#games" class="nav-link" id="navGames">Games</a>
+            <a href="#progress" class="nav-link" id="navProgress">Progress</a>
+          </div>
+        </div>
+        <div class="nav-right">
+          <div class="user-info">
+            <div class="avatar-circle"><span id="userInitial">P</span></div>
+            <span class="user-name" id="greetingName">Player</span>
+          </div>
+          <button id="btnLogout" class="btn-logout">Logout</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Lessons Section -->
+      <section class="lessons-section" id="lessonsSection">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h2>Touch Typing Lessons</h2>
+            <p class="subtitle">Master the keyboard with structured lessons</p>
+          </div>
+
+          <div class="lessons-grid">
+            <!-- Beginner Lessons -->
+            <div class="lesson-category">
+              <h3 class="category-title">Beginner</h3>
+              <div class="lesson-cards">
+                <div class="lesson-card" data-level="easy" data-mode="typing">
+                  <div class="lesson-number">1</div>
+                  <div class="lesson-info">
+                    <h4>Home Row Keys</h4>
+                    <p>Learn the foundation: A S D F J K L ;</p>
+                  </div>
+                  <button class="btn-start-lesson">Start</button>
+                </div>
+                <div class="lesson-card" data-level="easy" data-mode="typing">
+                  <div class="lesson-number">2</div>
+                  <div class="lesson-info">
+                    <h4>Top Row Keys</h4>
+                    <p>Practice: Q W E R T Y U I O P</p>
+                  </div>
+                  <button class="btn-start-lesson">Start</button>
+                </div>
+                <div class="lesson-card" data-level="easy" data-mode="typing">
+                  <div class="lesson-number">3</div>
+                  <div class="lesson-info">
+                    <h4>Bottom Row Keys</h4>
+                    <p>Master: Z X C V B N M</p>
+                  </div>
+                  <button class="btn-start-lesson">Start</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Intermediate Lessons -->
+            <div class="lesson-category">
+              <h3 class="category-title">Intermediate</h3>
+              <div class="lesson-cards">
+                <div class="lesson-card" data-level="medium" data-mode="typing">
+                  <div class="lesson-number">4</div>
+                  <div class="lesson-info">
+                    <h4>Numbers & Symbols</h4>
+                    <p>Type numbers and common symbols</p>
+                  </div>
+                  <button class="btn-start-lesson">Start</button>
+                </div>
+                <div class="lesson-card" data-level="medium" data-mode="typing">
+                  <div class="lesson-number">5</div>
+                  <div class="lesson-info">
+                    <h4>Words & Sentences</h4>
+                    <p>Build speed with real text</p>
+                  </div>
+                  <button class="btn-start-lesson">Start</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Lessons -->
+            <div class="lesson-category">
+              <h3 class="category-title">Advanced</h3>
+              <div class="lesson-cards">
+                <div class="lesson-card" data-level="hard" data-mode="coding">
+                  <div class="lesson-number">6</div>
+                  <div class="lesson-info">
+                    <h4>Code Typing</h4>
+                    <p>Practice programming syntax</p>
+                  </div>
+                  <button class="btn-start-lesson">Start</button>
+                </div>
+                <div class="lesson-card" data-level="hard" data-mode="typing">
+                  <div class="lesson-number">7</div>
+                  <div class="lesson-info">
+                    <h4>Speed Building</h4>
+                    <p>Maximize your typing speed</p>
+                  </div>
+                  <button class="btn-start-lesson">Start</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Practice Section -->
+      <section class="practice-section" id="practiceSection" style="display: none;">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h2 id="practiceTitle">Free Practice</h2>
+            <p class="subtitle">Practice typing at your own pace</p>
+          </div>
+
+          <div class="practice-container">
+            <!-- Practice Settings -->
+            <div class="practice-settings">
+              <div class="setting-group">
+                <label>Mode</label>
+                <select id="practiceMode" class="select-input">
+                  <option value="typing">Text Typing</option>
+                  <option value="coding">Code Practice</option>
+                </select>
+              </div>
+              <div class="setting-group">
+                <label>Difficulty</label>
+                <select id="practiceLevel" class="select-input">
+                  <option value="easy">Beginner</option>
+                  <option value="medium">Intermediate</option>
+                  <option value="hard">Advanced</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Timer Display -->
+            <div class="timer-display">
+              <div class="timer-text" id="timeLabel">Time: 0s</div>
+              <div class="progress-bar-container">
+                <div id="timeBar" class="progress-bar-fill"></div>
+              </div>
+            </div>
+
+            <!-- Typing Area -->
+            <div class="typing-area">
+              <div id="quote" class="text-to-type">Click Start Practice to begin...</div>
+              <textarea
+                id="input"
+                class="typing-input"
+                placeholder="Start typing here..."
+                disabled
+              ></textarea>
+            </div>
+
+            <!-- Virtual Keyboard Guide -->
+            <div class="keyboard-guide" id="keyboardGuide">
+              <div class="keyboard-hint">Use the correct finger:</div>
+              <div class="keyboard-container">
+                <div class="keyboard-row">
+                  <div class="key" data-key="q" data-finger="left-pinky">Q</div>
+                  <div class="key" data-key="w" data-finger="left-ring">W</div>
+                  <div class="key" data-key="e" data-finger="left-middle">E</div>
+                  <div class="key" data-key="r" data-finger="left-index">R</div>
+                  <div class="key" data-key="t" data-finger="left-index">T</div>
+                  <div class="key" data-key="y" data-finger="right-index">Y</div>
+                  <div class="key" data-key="u" data-finger="right-index">U</div>
+                  <div class="key" data-key="i" data-finger="right-middle">I</div>
+                  <div class="key" data-key="o" data-finger="right-ring">O</div>
+                  <div class="key" data-key="p" data-finger="right-pinky">P</div>
+                </div>
+                <div class="keyboard-row">
+                  <div class="key home-key" data-key="a" data-finger="left-pinky">A</div>
+                  <div class="key home-key" data-key="s" data-finger="left-ring">S</div>
+                  <div class="key home-key" data-key="d" data-finger="left-middle">D</div>
+                  <div class="key home-key" data-key="f" data-finger="left-index">F</div>
+                  <div class="key" data-key="g" data-finger="left-index">G</div>
+                  <div class="key" data-key="h" data-finger="right-index">H</div>
+                  <div class="key home-key" data-key="j" data-finger="right-index">J</div>
+                  <div class="key home-key" data-key="k" data-finger="right-middle">K</div>
+                  <div class="key home-key" data-key="l" data-finger="right-ring">L</div>
+                  <div class="key home-key" data-key=";" data-finger="right-pinky">;</div>
+                </div>
+                <div class="keyboard-row">
+                  <div class="key" data-key="z" data-finger="left-pinky">Z</div>
+                  <div class="key" data-key="x" data-finger="left-ring">X</div>
+                  <div class="key" data-key="c" data-finger="left-middle">C</div>
+                  <div class="key" data-key="v" data-finger="left-index">V</div>
+                  <div class="key" data-key="b" data-finger="left-index">B</div>
+                  <div class="key" data-key="n" data-finger="right-index">N</div>
+                  <div class="key" data-key="m" data-finger="right-index">M</div>
+                  <div class="key" data-key="," data-finger="right-middle">,</div>
+                  <div class="key" data-key="." data-finger="right-ring">.</div>
+                  <div class="key" data-key="/" data-finger="right-pinky">/</div>
+                </div>
+                <div class="keyboard-row">
+                  <div class="key spacebar" data-key=" " data-finger="thumb">Space</div>
+                </div>
+              </div>
+              <div class="finger-guide">
+                <div class="hand left-hand">
+                  <div class="finger-label">Left Hand</div>
+                  <div class="fingers">
+                    <div class="finger" data-finger="left-pinky">Pinky</div>
+                    <div class="finger" data-finger="left-ring">Ring</div>
+                    <div class="finger" data-finger="left-middle">Middle</div>
+                    <div class="finger" data-finger="left-index">Index</div>
+                  </div>
+                </div>
+                <div class="hand right-hand">
+                  <div class="finger-label">Right Hand</div>
+                  <div class="fingers">
+                    <div class="finger" data-finger="right-index">Index</div>
+                    <div class="finger" data-finger="right-middle">Middle</div>
+                    <div class="finger" data-finger="right-ring">Ring</div>
+                    <div class="finger" data-finger="right-pinky">Pinky</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats Display -->
+            <div class="stats-container">
+              <div class="stat-box">
+                <div class="stat-value" id="wpm">0</div>
+                <div class="stat-label">WPM</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value" id="accuracy">0%</div>
+                <div class="stat-label">Accuracy</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value" id="errors">0</div>
+                <div class="stat-label">Errors</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value" id="chars">0</div>
+                <div class="stat-label">Characters</div>
+              </div>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="control-buttons">
+              <button id="btnStart" class="btn-primary">Start Practice</button>
+              <button id="btnNext" class="btn-primary" disabled>Next Exercise</button>
+              <button id="btnReset" class="btn-secondary">Reset</button>
+            </div>
+
+            <!-- Result Display -->
+            <div class="result-display" id="result"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Games Section -->
+      <section class="games-section" id="gamesSection" style="display: none;">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h2>Typing Games</h2>
+            <p class="subtitle">Learn while having fun</p>
+          </div>
+
+          <div class="games-grid">
+            <div class="game-card" data-game="accuracy" data-href="accuracy-master.html" style="cursor: pointer;">
+              <div class="game-icon">🎯</div>
+              <h3>Accuracy Master</h3>
+              <p>Type with perfect precision</p>
+              <div class="game-levels">
+                <button class="level-btn" data-level="easy">Easy</button>
+                <button class="level-btn" data-level="medium">Medium</button>
+                <button class="level-btn" data-level="hard">Hard</button>
+              </div>
+            </div>
+
+            <div class="game-card" data-game="typing" data-level="easy">
+              <div class="game-icon">⌨️</div>
+              <h3>Word Challenge</h3>
+              <p>Unscramble words before time runs out</p>
+              <div class="game-levels">
+                <button class="level-btn" data-href="word-challenge.html">Play Now</button>
+              </div>
+            </div>
+
+            <div class="game-card" data-game="coding" data-level="easy">
+              <div class="game-icon">💻</div>
+              <h3>Code Sprint</h3>
+              <p>Type code snippets and master programming syntax</p>
+              <div class="game-levels">
+                <button class="level-btn" data-href="code-sprint.html">Play Now</button>
+              </div>
+            </div>
+
+            <div class="game-card" data-game="quiz" data-level="easy">
+              <div class="game-icon">❓</div>
+              <h3>GK Quiz</h3>
+              <p>Answer quick general knowledge questions.</p>
+              <div class="game-levels">
+                <button class="level-btn" data-level="easy">Start</button>
+              </div>
+            </div>
+
+            <div class="game-card" data-game="typing" data-level="medium">
+              <div class="game-icon">⚡</div>
+              <h3>Code Sprint Speed Test</h3>
+              <p>Type code snippets as fast as possible!</p>
+              <div class="game-levels">
+                <button class="level-btn" data-href="code-sprint-speed.html">Play Now</button>
+              </div>
+            </div>
+
+            <div class="game-card" data-href="keyboard-jump.html" style="cursor: pointer;">
+              <div class="game-icon">🎮</div>
+              <h3>Keyboard Jump</h3>
+              <p>Jump across platforms by typing words!</p>
+              <div class="game-levels">
+                <button class="level-btn" data-href="keyboard-jump.html">Play Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Progress Section -->
+      <section class="progress-section" id="progressSection" style="display: none;">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h2>Your Progress</h2>
+            <p class="subtitle">Track your typing improvement</p>
+          </div>
+
+          <div class="progress-grid">
+            <div class="progress-card">
+              <h3>Best Scores</h3>
+              <div class="score-list">
+                <div class="score-item">
+                  <span>Beginner</span>
+                  <span class="score-value" id="bestEasy">-- WPM</span>
+                </div>
+                <div class="score-item">
+                  <span>Intermediate</span>
+                  <span class="score-value" id="bestMedium">-- WPM</span>
+                </div>
+                <div class="score-item">
+                  <span>Advanced</span>
+                  <span class="score-value" id="bestHard">-- WPM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="progress-card">
+              <h3>Lessons Completed</h3>
+              <div class="progress-circle">
+                <div class="circle-value">0/7</div>
+                <div class="circle-label">Lessons</div>
+              </div>
+            </div>
+
+            <div class="progress-card">
+              <h3>Average Accuracy</h3>
+              <div class="progress-circle">
+                <div class="circle-value" id="avgAccuracy">0%</div>
+                <div class="circle-label">Accuracy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Hidden selects for game.js compatibility -->
+  <select id="mode" style="display: none;">
+    <option value="typing">Typing</option>
+    <option value="coding">Coding</option>
+    <option value="quiz">Quiz</option>
+  </select>
+  <select id="level" style="display: none;">
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+
+  <script src="api.js"></script>
+  <script src="auth.js"></script>
+  <script src="navigation.js"></script>
+  <script src="game.js"></script>
+  <script src="games.js"></script>
+</body>
+</html>

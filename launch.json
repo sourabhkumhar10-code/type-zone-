@@ -1,0 +1,30 @@
+\{
+  "version": "0.2.0",
+  "configurations": [
+    
+
+
+
+
+    
+    
+
+
+
+
+    {
+      "name": "Launch Chrome (http://localhost:8080)",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Open index.html in Chrome",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "file": "${workspaceFolder}/index.html",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
