@@ -46,8 +46,7 @@ app.get('/forgot', (req, res) => {
 
 ## Registered Emails to Test With:
 - skumhar202o@gmail.com
-- SOURABHKUMHAR10@GMAIL.COM
-- ashadevinishainteriors@gmail.com
+- SOURABHKUMHAR10@GMAIL.COm
 - sourabhkumhar10@gmail.com
 
 ## If It Still Doesn't Work:
