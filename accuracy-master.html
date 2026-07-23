@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate" />
+  <title>Accuracy Master- Type Zone</title>
+  <meta name="description" content="Accuracy-focused typing game. Hit the right keys with zero mistakes to build perfect typing accuracy.">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+   body {
+      margin: 0;
+     font-family: 'Quicksand', sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 45%, #000 100%);
+     color: #e5e7eb;
+    }
+
+    .accuracy-game-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .accuracy-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .accuracy-header h1 {
+     font-size: 32px;
+     color: #e5e7eb;
+    }
+
+    .accuracy-header p {
+     color: #9ca3af;
+      margin: 4px 0 0;
+    }
+
+    .accuracy-header button {
+      cursor: pointer;
+    }
+
+    .accuracy-hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+     border-radius: 10px;
+      background: rgba(15, 23, 42, 0.9);
+     border: 1px solid rgba(148, 163, 184, 0.25);
+      margin-bottom: 16px;
+    }
+
+    .accuracy-hud-group {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .accuracy-stat {
+      display: flex;
+      flex-direction: column;
+     font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+     color: #9ca3af;
+    }
+
+    .accuracy-stat span {
+     font-size: 22px;
+     font-weight: 700;
+     color: #e5e7eb;
+      margin-top: 2px;
+    }
+
+    .accuracy-stat span.accent {
+     color: #22c55e;
+    }
+
+    .accuracy-lives {
+     font-size: 22px;
+    }
+
+    .accuracy-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .accuracy-btn {
+      padding: 8px 16px;
+     border-radius: 999px;
+     border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+     color: #e5e7eb;
+     font-weight: 600;
+      cursor: pointer;
+     font-family: 'Quicksand', sans-serif;
+     font-size: 14px;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    }
+
+    .accuracy-btn.primary {
+      background: linear-gradient(135deg, #22c55e, #4ade80);
+     border-color: transparent;
+     color: #022c22;
+     box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+    }
+
+    .accuracy-btn:active {
+      transform: translateY(1px);
+     box-shadow: none;
+    }
+
+    .accuracy-difficulty {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+     font-size: 13px;
+     color: #9ca3af;
+    }
+
+    .accuracy-difficulty button {
+      padding: 4px 10px;
+     border-radius: 999px;
+     border: 1px solid transparent;
+      background: transparent;
+     color: #9ca3af;
+     font-size: 12px;
+      cursor: pointer;
+     font-family: 'Quicksand', sans-serif;
+    }
+
+    .accuracy-difficulty button.active {
+     border-color: #22c55e;
+     color: #bbf7d0;
+      background: rgba(34, 197, 94, 0.16);
+    }
+
+    .accuracy-stage {
+      position: relative;
+     border-radius: 16px;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #1f2937 0%, #020617 60%);
+     border: 1px solid rgba(148, 163, 184, 0.35);
+     box-shadow: 0 25px 60px rgba(0,0,0,0.65);
+    }
+
+    #accuracyCanvas {
+      display: block;
+      width: 100%;
+      height: 460px;
+      background: transparent;
+      cursor: default;
+    }
+
+    .accuracy-callout {
+      position: absolute;
+      left: 50%;
+     bottom: 18px;
+      transform: translateX(-50%);
+      padding: 6px 14px;
+     border-radius: 999px;
+      background: rgba(15, 23, 42, 0.92);
+     border: 1px solid rgba(148, 163, 184, 0.35);
+     font-size: 12px;
+     color: #9ca3af;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .accuracy-callout span.key {
+      padding: 2px 8px;
+     border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+     border: 1px solid rgba(148, 163, 184, 0.6);
+     font-size: 11px;
+     color: #e5e7eb;
+    }
+
+    .accuracy-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .accuracy-overlay-inner {
+      text-align: center;
+      background: radial-gradient(circle at top, rgba(30,64,175,0.95), rgba(15,23,42,0.96));
+      padding: 32px 40px;
+     border-radius: 20px;
+     border: 1px solid rgba(191, 219, 254, 0.5);
+     box-shadow: 0 25px 60px rgba(30,64,175,0.7);
+      max-width: 420px;
+    }
+
+    .accuracy-overlay h2 {
+      margin: 0 0 8px;
+     font-size: 26px;
+     color: #eff6ff;
+    }
+
+    .accuracy-overlay p {
+      margin: 0 0 18px;
+     color: #bfdbfe;
+     font-size: 14px;
+    }
+
+    .accuracy-overlay-stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .accuracy-overlay-stat {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.85);
+     border-radius: 14px;
+      padding: 10px 12px;
+     border: 1px solid rgba(148, 163, 184, 0.4);
+     font-size: 12px;
+     color: #9ca3af;
+    }
+
+    .accuracy-overlay-stat span {
+      display: block;
+      margin-top: 4px;
+     font-size: 18px;
+     font-weight: 700;
+     color: #e5e7eb;
+    }
+
+    .accuracy-overlay.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="accuracy-game-container">
+    <div class="accuracy-header">
+      <div>
+        <h1>🎯 Accuracy Master</h1>
+        <p>Type with perfect precision. One mistake can cost a streak.</p>
+      </div>
+      <button class="accuracy-btn" data-href="index.html">← Back to Home</button>
+    </div>
+
+    <div class="accuracy-hud">
+      <div class="accuracy-hud-group">
+        <div class="accuracy-stat">
+          Accuracy
+          <span class="accent" id="accAccuracy">100%</span>
+        </div>
+        <div class="accuracy-stat">
+          Combo
+          <span id="accCombo">0x</span>
+        </div>
+        <div class="accuracy-stat">
+          Perfect hits
+          <span id="accPerfects">0</span>
+        </div>
+      </div>
+
+      <div class="accuracy-hud-group">
+        <div class="accuracy-stat">
+          Time
+          <span id="accTime">0s</span>
+        </div>
+        <div class="accuracy-stat">
+          Score
+          <span id="accScore">0</span>
+        </div>
+        <div class="accuracy-stat">
+          Lives
+          <span class="accuracy-lives" id="accLives">❤️❤️❤️</span>
+        </div>
+      </div>
+
+      <div class="accuracy-controls">
+        <div class="accuracy-difficulty">
+          <span>Difficulty</span>
+          <button data-level="easy" class="active">Easy</button>
+          <button data-level="medium">Medium</button>
+          <button data-level="hard">Hard</button>
+        </div>
+        <button class="accuracy-btn primary" id="accStartBtn">Start</button>
+        <button class="accuracy-btn" id="accPauseBtn" style="display:none;">Pause</button>
+      </div>
+    </div>
+
+    <div class="accuracy-stage">
+      <canvas id="accuracyCanvas"></canvas>
+
+      <div class="accuracy-callout">
+        <span>Type the glowing letter before it reaches the red zone.</span>
+        <span class="key">ESC = Quit round</span>
+      </div>
+
+      <div class="accuracy-overlay" id="accOverlay">
+        <div class="accuracy-overlay-inner">
+          <h2 id="accOverlayTitle">Accuracy Master</h2>
+          <p id="accOverlaySubtitle">Press Start to begin a new round.</p>
+          <div class="accuracy-overlay-stats">
+            <div class="accuracy-overlay-stat">
+              Best Accuracy
+              <span id="accBestAccuracy">—</span>
+            </div>
+            <div class="accuracy-overlay-stat">
+              Best Score
+              <span id="accBestScore">—</span>
+            </div>
+            <div class="accuracy-overlay-stat">
+              Longest Combo
+              <span id="accBestCombo">—</span>
+            </div>
+          </div>
+          <button class="accuracy-btn primary" id="accOverlayBtn">Start Round</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="accuracy-master.js"></script>
+  <script src="accuracy-master-bindings.js"></script>
+</body>
+</html>

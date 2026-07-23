@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Sprint Speed Test - Type Code Fast!</title>
+    <link rel="stylesheet" href="code-sprint-speed.css">
+</head>
+<body>
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+        <div class="container">
+            <h1 class="game-title">⚡ Code Sprint Speed Test</h1>
+            <p class="subtitle">Test your coding speed and accuracy</p>
+            
+            <div class="difficulty-select">
+                <h3>Select Difficulty:</h3>
+                <div class="difficulty-buttons">
+                    <button class="btn btn-difficulty" data-level="easy">Easy</button>
+                    <button class="btn btn-difficulty" data-level="medium">Medium</button>
+                    <button class="btn btn-difficulty" data-level="hard">Hard</button>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h3>How to Play:</h3>
+                <ul>
+                    <li>Type the code snippet as fast as possible</li>
+                    <li>You have 15 seconds per snippet</li>
+                    <li>Exact match required (case-sensitive)</li>
+                    <li>Build speed streaks for bonus points!</li>
+                </ul>
+            </div>
+            
+            <div class="high-score-display">
+                <h3>High Score: <span id="high-score">0</span></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <div class="container">
+            <!-- Header -->
+            <div class="game-header">
+                <div class="stats-left">
+                    <div class="stat-box">
+                        <span class="stat-label">Score</span>
+                        <span class="stat-value" id="score">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Streak</span>
+                        <span class="stat-value" id="streak">0</span>
+                    </div>
+                </div>
+                
+                <div class="timer-container">
+                    <div class="timer-label">Time Remaining</div>
+                    <div class="timer-bar">
+                        <div class="timer-fill" id="timer-fill"></div>
+                    </div>
+                    <div class="timer-text" id="timer-text">15</div>
+                </div>
+                
+                <div class="stats-right">
+                    <div class="stat-box">
+                        <span class="stat-label">Level</span>
+                        <span class="stat-value" id="level">1</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Snippets</span>
+                        <span class="stat-value" id="snippets-solved">0/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text">Level Progress</div>
+            </div>
+
+            <!-- Code Display -->
+            <div class="code-section">
+                <div class="code-language" id="code-language">JavaScript</div>
+                <div class="code-display" id="code-display">
+                    <!-- Code snippet will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Answer Input -->
+            <div class="input-section">
+                <textarea id="answer-input" placeholder="Type the code here..." rows="3" autocomplete="off" spellcheck="false"></textarea>
+                <button class="btn btn-submit" id="submit-btn">Submit</button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-hint" id="hint-btn">💡 Skip (-5 pts)</button>
+                <button class="btn btn-pause" id="pause-btn">⏸️ Pause</button>
+            </div>
+
+            <!-- Feedback Message -->
+            <div class="feedback" id="feedback"></div>
+        </div>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pause-screen" class="screen overlay">
+        <div class="modal">
+            <h2>Speed Test Paused</h2>
+            <div class="modal-buttons">
+                <button class="btn btn-resume" id="resume-btn">▶️ Resume</button>
+                <button class="btn btn-restart" id="restart-btn-pause">🔄 Restart</button>
+                <button class="btn btn-quit" id="quit-btn">❌ Quit to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="screen overlay">
+        <div class="modal">
+            <h2 id="gameover-title">Speed Test Complete!</h2>
+            
+            <div class="final-stats">
+                <div class="final-stat">
+                    <div class="stat-label">Final Score</div>
+                    <div class="stat-value-large" id="final-score">0</div>
+                </div>
+                <div class="final-stat">
+                    <div class="stat-label">Snippets Solved</div>
+                    <div class="stat-value-large" id="snippets-solved-final">0</div>
+                </div>
+                <div class="final-stat">
+                    <div class="stat-label">Best Streak</div>
+                    <div class="stat-value-large" id="best-streak">0</div>
+                </div>
+                <div class="final-stat">
+                    <div class="stat-label">Accuracy</div>
+                    <div class="stat-value-large" id="accuracy">0%</div>
+                </div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn btn-play-again" id="play-again-btn">🎮 Play Again</button>
+                <button class="btn btn-menu" id="menu-btn">📋 Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Animation Container -->
+    <div id="success-animation" class="animation-container"></div>
+
+    <script src="code-sprint-speed.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Type Zone — Reset Password</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .auth-card {
+      max-width: 450px;
+      padding: 40px;
+    }
+    
+    .icon-key {
+      font-size: 48px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .password-requirements {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+    
+    .password-requirements ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    
+    .password-requirements li {
+      margin: 5px 0;
+      color: #92400e;
+    }
+    
+    .password-strength {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    
+    .strength-bar {
+      height: 4px;
+      background: #e5e7eb;
+      border-radius: 2px;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+    
+    .strength-fill {
+      height: 100%;
+      width: 0;
+      transition: width 0.3s, background-color 0.3s;
+    }
+    
+    .strength-weak { background: #ef4444; width: 33%; }
+    .strength-medium { background: #f59e0b; width: 66%; }
+    .strength-strong { background: #22c55e; width: 100%; }
+    
+    .error-alert {
+      background: #fef2f2;
+      border: 1px solid #ef4444;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      color: #dc2626;
+    }
+    
+    .success-alert {
+      background: #f0fdf4;
+      border: 1px solid #22c55e;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      color: #16a34a;
+    }
+    
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="centered">
+  <div class="card auth-card">
+    <div class="icon-key">🔑</div>
+    <h1 class="login-logo">Reset Password</h1>
+    <p class="muted">Create a strong password for your account</p>
+
+    <div id="tokenError" style="display: none;">
+      <div class="error-alert">
+        <strong>⚠️ Invalid or Missing Token</strong>
+        <p style="margin: 10px 0;">The password reset token is missing or invalid.</p>
+        <p><a href="forgot.html" style="color: #22c55e;">Request a new reset link →</a></p>
+      </div>
+    </div>
+
+    <form id="resetForm" class="stack" autocomplete="off" style="display: none;">
+      <div class="password-requirements">
+        <strong>Password Requirements:</strong>
+        <ul>
+          <li>At least 6 characters long</li>
+          <li>Mix of letters and numbers recommended</li>
+          <li>Avoid common passwords</li>
+        </ul>
+      </div>
+
+      <label>New Password
+        <input id="password" type="password" placeholder="Enter new password" required style="font-size: 16px; padding: 12px;" />
+        <div class="password-strength">
+          <div class="strength-bar">
+            <div id="strengthBar" class="strength-fill"></div>
+          </div>
+          <span id="strengthText" style="color: #6b7280;">Password strength: Not entered</span>
+        </div>
+      </label>
+
+      <label>Confirm Password
+        <input id="confirmPassword" type="password" placeholder="Re-enter password" required style="font-size: 16px; padding: 12px;" />
+        <p id="matchError" style="color: var(--danger); font-size: 12px; margin-top: 5px; display: none;">Passwords do not match</p>
+      </label>
+
+      <button type="submit" id="submitBtn">Reset Password</button>
+    </form>
+
+    <div id="successMessage" style="display: none;">
+      <div class="success-alert">
+        <h3 style="margin: 0 0 10px 0; color: #16a34a;">✅ Password Reset Successful!</h3>
+        <p>Your password has been updated securely.</p>
+        <p style="margin-top: 15px;">
+          <a href="login.html" style="color: #22c55e; font-weight: bold;">Go to Login →</a>
+        </p>
+      </div>
+    </div>
+
+    <p id="errorMessage" class="tiny muted" style="color: var(--danger); display: none;"></p>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="auth.js"></script>
+  <script src="reset.js"></script>
+</body>
+</html>

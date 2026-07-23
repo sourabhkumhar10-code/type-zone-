@@ -1,0 +1,10 @@
+# Ignore local runtime files and generated artifacts
+rstudio/
+server/data/*.sqlite*
+*.sqlite*
+*.log
+node_modules/
+.vscode/
+.qoder
+.DS_Store
+

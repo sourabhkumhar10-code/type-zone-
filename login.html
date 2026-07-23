@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Type Zone — Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="centered">
+  <div class="card auth-card">
+    <h1 class="login-logo">Type Zone</h1>
+    <p class="muted">Login to start playing</p>
+
+    <form id="loginForm" class="stack" autocomplete="off">
+      <label>Username
+        <input id="username" type="text" placeholder="e.g. Suraj" required autocomplete="username" />
+      </label>
+
+      <label>Password
+        <input id="password" type="password" placeholder="Your password" required autocomplete="current-password" />
+      </label>
+
+      <button type="submit">Login</button>
+    </form>
+    <p id="errorMsg" class="tiny" style="color: var(--bad); margin-top: 8px; min-height: 20px;"></p>
+    <p class="tiny" style="margin-top:6px;">
+      <a href="forgot.html" class="text-link">Forgot password?</a>
+    </p>
+    <p class="tiny muted">
+        Don't have an account? 
+        <a href="register.html" class="text-brand" style="font-weight: 700;">Register here.</a>
+    </p>
+
+    <p class="tiny muted">Note: Accounts are now stored securely on the Type Zone server.</p>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="auth.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
